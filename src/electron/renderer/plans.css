@@ -1,0 +1,132 @@
+:root {
+  color-scheme: dark;
+  --qt-bg: #0e0e11;
+  --qt-card: #17181c;
+  --qt-border: #26272d;
+  --qt-text: #ececf1;
+  --qt-dim: #9a9aa5;
+  --qt-ok: #3fb950;
+  --qt-warn: #d29922;
+  --qt-bad: #f85149;
+  --qt-unknown: #6e6e79;
+  --qt-accent: #ececf1;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 20px 18px 28px;
+  background: var(--qt-bg);
+  color: var(--qt-text);
+  font: 14px/1.45 -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.qt-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.qt-header h1 { font-size: 19px; margin: 0; font-weight: 650; }
+.qt-sub { margin: 3px 0 0; color: var(--qt-dim); font-size: 12.5px; }
+
+.qt-btn {
+  appearance: none;
+  border: 1px solid var(--qt-border);
+  background: #1d1e24;
+  color: var(--qt-text);
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.qt-btn:hover { background: #24252c; }
+.qt-btn-primary { background: var(--qt-accent); color: #111; border-color: var(--qt-accent); font-weight: 600; }
+.qt-btn-primary:hover { background: #fff; }
+.qt-btn-danger { color: var(--qt-bad); }
+
+.qt-banner {
+  border: 1px solid var(--qt-warn);
+  color: var(--qt-warn);
+  border-radius: 10px;
+  padding: 8px 11px;
+  font-size: 12.5px;
+  margin-bottom: 12px;
+}
+.qt-banner-error { border-color: var(--qt-bad); color: var(--qt-bad); }
+
+.qt-cards { display: flex; flex-direction: column; gap: 12px; }
+
+.qt-card {
+  background: var(--qt-card);
+  border: 1px solid var(--qt-border);
+  border-radius: 14px;
+  padding: 14px 15px 12px;
+}
+
+.qt-card-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.qt-card-name { font-size: 15px; font-weight: 650; }
+
+.qt-badge {
+  font-size: 11px;
+  color: var(--qt-dim);
+  border: 1px solid var(--qt-border);
+  border-radius: 999px;
+  padding: 2px 8px;
+  white-space: nowrap;
+}
+
+.qt-runway { font-size: 16.5px; font-weight: 650; margin: 8px 0 2px; }
+.qt-runway .qt-dim { color: var(--qt-dim); font-weight: 400; font-size: 13px; }
+
+.qt-bar {
+  height: 8px;
+  border-radius: 999px;
+  background: #26272d;
+  overflow: hidden;
+  margin: 10px 0 8px;
+}
+.qt-bar-fill { height: 100%; border-radius: 999px; background: var(--qt-ok); }
+.qt-bar-fill[data-status="warning"] { background: var(--qt-warn); }
+.qt-bar-fill[data-status="critical"], .qt-bar-fill[data-status="exhausted"] { background: var(--qt-bad); }
+.qt-bar-fill[data-status="unknown"] { background: var(--qt-unknown); }
+
+.qt-stats { font-size: 13px; }
+.qt-meta { color: var(--qt-dim); font-size: 12.5px; margin-top: 2px; }
+
+.qt-card-actions { display: flex; gap: 8px; margin-top: 11px; align-items: center; }
+.qt-card-actions .qt-btn { height: 28px; font-size: 12.5px; padding: 0 10px; }
+.qt-adjust { display: flex; gap: 6px; align-items: center; margin-left: auto; }
+.qt-adjust input {
+  width: 92px; height: 28px;
+  background: #101116; color: var(--qt-text);
+  border: 1px solid var(--qt-border); border-radius: 7px; padding: 0 8px; font-size: 12.5px;
+}
+
+.qt-empty { color: var(--qt-dim); font-size: 13.5px; padding: 18px 4px; }
+
+.qt-form {
+  margin-top: 16px;
+  background: var(--qt-card);
+  border: 1px solid var(--qt-border);
+  border-radius: 14px;
+  padding: 16px 15px;
+  display: flex; flex-direction: column; gap: 11px;
+}
+.qt-form h2 { margin: 0; font-size: 15px; }
+.qt-form label { display: flex; flex-direction: column; gap: 5px; font-size: 12.5px; color: var(--qt-dim); }
+.qt-form input, .qt-form select {
+  height: 36px;
+  background: #101116; color: var(--qt-text);
+  border: 1px solid var(--qt-border); border-radius: 9px; padding: 0 10px; font-size: 13.5px;
+}
+.qt-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.qt-form-actions { display: flex; gap: 8px; margin-top: 2px; }
+
+.qt-footer { margin-top: 18px; color: var(--qt-dim); font-size: 12px; }
+.qt-footer strong { color: var(--qt-text); }

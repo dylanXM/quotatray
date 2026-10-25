@@ -1,3 +1,19 @@
+# QuotaTray
+
+**QuotaTray is a Windows & macOS tray / menu-bar app that watches every AI subscription you pay for — each plan's total quota, used, remaining, daily burn rate, and the projected date your current pace runs out — so a quota never runs dry by surprise.**
+
+QuotaTray is an open-source derivative of **[Token Monitor](https://github.com/Javis603/token-monitor)** by Javis, used under the MIT License (see `LICENSE` and `NOTICE.md` in this repository). The complete Token Monitor documentation follows below the divider: the live token dashboard, cross-device hub sync, and widgets are all part of this codebase.
+
+**What QuotaTray adds on top of Token Monitor:**
+
+- A subscription-plan engine (`src/shared/plans/` and `src/electron/plans/`) that models each AI plan — cycle length, quota size, reset day.
+- A plans panel in the tray app (`src/electron/renderer/plans.html`, `plans.css`, `plansPanel.js`) showing per-plan remaining quota, burn rate, and projected run-out date. See also `PRODUCT-README.md`.
+- A branded QuotaTray package build (`scripts/electron-builder.quotatray.js`, `scripts/quotatray-harness.js`, `npm run pack:quotatray`).
+
+**Download / build:** build from source with `npm ci`, then `npm run dist:win` (Windows), `npm run dist:mac` (macOS), or `npm run pack:quotatray` for the branded package. The app's Tool Library resource packs are published separately at [dylanXM/quotatray-resource-packs](https://github.com/dylanXM/quotatray-resource-packs).
+
+---
+
 <p align="right">
    <strong>EN</strong> | <a href="./README.zh-CN.md">简</a> | <a href="./README.zh-TW.md">繁</a> | <a href="./README.ko.md">KO</a> | <a href="./README.ja.md">JA</a> | <a href="./README.pt-BR.md">PT</a>
 </p>

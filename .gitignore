@@ -23,3 +23,20 @@ worker/.wrangler/
 worker/node_modules/
 worker/.dev.vars
 devlog/
+
+# --- QuotaTray open-source release: local-only material, never published ---
+# Build artifacts and scratch trees
+dist-deliverables/
+native-rebuild/
+scratch-slim/
+# Local verification scratch
+verification/
+# Resource packs live in their own repo (dylanXM/quotatray-resource-packs)
+packs-repo/
+# Internal commercial / working documents
+PAYHIP-LISTING.md
+RESULT.md
+PACKAGING-RESULT.md
+TAURI-MIGRATION-PLAN.md
+OSS-SURVEY.md
+docs/UI-REVIEW-CHECKLIST.md

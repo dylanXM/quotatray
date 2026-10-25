@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QuotaTray — Subscription Plans</title>
+<link rel="stylesheet" href="plans.css">
+</head>
+<body>
+  <header class="qt-header">
+    <div>
+      <h1>Subscription Plans</h1>
+      <p class="qt-sub">Quota runway for every AI plan you pay for.</p>
+    </div>
+    <button id="qt-add-toggle" class="qt-btn qt-btn-primary" type="button">Add plan</button>
+  </header>
+
+  <div id="qt-demo-banner" class="qt-banner" hidden>
+    Demo preview — sample numbers. Open this panel from the installed app to manage your real plans.
+  </div>
+  <div id="qt-error" class="qt-banner qt-banner-error" hidden></div>
+
+  <main id="qt-cards" class="qt-cards"></main>
+
+  <p id="qt-empty" class="qt-empty" hidden>
+    No plans yet. Add your first subscription — its monthly quota, reset day,
+    and where its usage comes from — and QuotaTray will watch the runway for you.
+  </p>
+
+  <form id="qt-form" class="qt-form" hidden>
+    <h2 id="qt-form-title">Add a plan</h2>
+    <input type="hidden" id="f-id">
+    <label>Plan name
+      <input id="f-name" type="text" placeholder="e.g. ChatGPT Plus" required>
+    </label>
+    <div class="qt-row">
+      <label>Total quota per cycle
+        <input id="f-total" type="number" min="0" step="any" placeholder="e.g. 1000000" required>
+      </label>
+      <label>Unit
+        <input id="f-unit" type="text" value="tokens" placeholder="tokens / requests / credits…">
+      </label>
+    </div>
+    <label>Where does usage come from?
+      <select id="f-source">
+        <option value="manual">Manual — I enter usage myself (estimate)</option>
+        <option value="claude-code-logs">Automatic — Claude Code local logs</option>
+        <option value="codex-logs">Automatic — Codex CLI local logs</option>
+      </select>
+    </label>
+    <label id="f-manual-wrap">Used so far this cycle
+      <input id="f-manual-used" type="number" min="0" step="any" value="0">
+    </label>
+    <label>Cycle
+      <select id="f-cycle-type">
+        <option value="monthly">Monthly, resets on a fixed day</option>
+        <option value="rolling">Rolling window (every N days)</option>
+        <option value="fixed">Fixed period (start → end)</option>
+      </select>
+    </label>
+    <label id="f-reset-wrap">Reset day of month (1–28)
+      <input id="f-reset-day" type="number" min="1" max="28" value="1">
+    </label>
+    <label id="f-length-wrap" hidden>Window length in days
+      <input id="f-length-days" type="number" min="1" value="30">
+    </label>
+    <div id="f-fixed-wrap" class="qt-row" hidden>
+      <label>Start date<input id="f-start" type="date"></label>
+      <label>End date<input id="f-end" type="date"></label>
+    </div>
+    <div class="qt-form-actions">
+      <button type="submit" class="qt-btn qt-btn-primary">Save plan</button>
+      <button type="button" id="qt-form-cancel" class="qt-btn">Cancel</button>
+    </div>
+  </form>
+
+  <footer class="qt-footer">
+    <p><strong>Where the numbers come from.</strong> Automatic plans read the
+    log files Claude Code / Codex CLI already keep on this computer — nothing
+    is sent anywhere. Manual plans use the usage you enter and are labelled
+    estimates. Run-out dates are projections from your recent pace, not
+    promises from the provider: most AI subscriptions publish no official
+    quota API, so QuotaTray never pretends to have one.</p>
+  </footer>
+
+  <script src="../../shared/plans/plans.js"></script>
+  <script src="plansPanel.js"></script>
+</body>
+</html>

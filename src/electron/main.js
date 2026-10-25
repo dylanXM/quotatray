@@ -26,6 +26,7 @@ const motionPreferenceApi = require('./motionPreference');
 const tokenNumberAnimationApi = require('./tokenNumberAnimation');
 const { clearBackgroundImage, getBackgroundImage, importBackgroundImage } = require('./backgroundImage');
 const { createClientSourceIpcHandlers } = require('./clientSourceIpc');
+const { attachPlans } = require('./plans/plansService');
 const { createClaudeWebFetch } = require('./providers/claude/webFetch');
 const { createMimoExchangeFetch } = require('./providers/mimo/exchangeFetch');
 const { runAntigravityOAuthLogin } = require('./providers/antigravity/oauthLogin');
@@ -525,6 +526,7 @@ const TRAY_OPEN_VIEW_IDS = new Set(['home', 'project', 'session', 'limits', 'tre
 
 let mainWindow = null;
 let dashboardWindow = null;
+let quotaTrayPlans = null;
 let settingsPath = null;
 let settings = null;
 let initialLimitProvidersPending = false;
@@ -6421,6 +6423,7 @@ function ensureTray() {
     onSetEdgeDock: setEdgeDockFromMenu,
     onSwitchCodexAccount: (accountId) => { void switchCodexAccountFromTray(accountId); },
     onOpenSettings: openSettingsFromTray,
+    onOpenSubscriptionPlans: () => { if (quotaTrayPlans) quotaTrayPlans.openPlansWindow(); },
     onQuit: requestAppQuit,
     translateMenu: (key, params) => translate(trayMenuLocale(), key, params)
   });
@@ -9485,6 +9488,7 @@ app.whenReady().then(() => {
     actionWindowForEvent(BrowserWindow, event, mainWindow)?.close();
   });
   ipcMain.handle('dashboard:open', () => { createDashboardWindow(); return true; });
+  if (!quotaTrayPlans) quotaTrayPlans = attachPlans({ app, ipcMain, BrowserWindow });
   ipcMain.handle('dashboard:getHistory', (_event, options) => getDashboardHistory(options));
   ipcMain.on('dashboard:ready', (event) => {
     const win = BrowserWindow.fromWebContents(event.sender);

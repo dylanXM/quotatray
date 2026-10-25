@@ -1,0 +1,43 @@
+name: quotatray-release
+
+# Manual release builds for the QuotaTray branded package (Windows + macOS
+# cannot be produced on the Linux dev VM). Trigger from the Actions tab,
+# download the artifacts, and attach them to the Payhip product manually.
+# Nothing here publishes anywhere.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            platform: win32-x64
+            dist: dist:win
+          - os: macos-latest
+            platform: darwin-arm64
+            dist: dist:mac
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Build branded package
+        shell: bash
+        run: |
+          node scripts/ensure-vendored-tokscale.js --platform=${{ matrix.platform }}
+          npx electron-builder --config scripts/electron-builder.quotatray.js --publish never
+      - uses: actions/upload-artifact@v4
+        with:
+          name: quotatray-${{ matrix.platform }}
+          path: |
+            dist/*.exe
+            dist/*.dmg
+            dist/*.zip
+          if-no-files-found: warn

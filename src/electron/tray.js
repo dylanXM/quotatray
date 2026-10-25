@@ -395,6 +395,7 @@ function buildTrayMenuTemplate(options = {}) {
     { type: 'separator' },
     { label: t('trayMenu.version', { version: state.appVersion || '' }), enabled: false },
     { label: t('trayMenu.settings'), click: callback('onOpenSettings') },
+    { label: 'Subscription Plans…', click: callback('onOpenSubscriptionPlans') },
     {
       label: t('trayMenu.quit'),
       // macOS draws a menu item's shortcut from `accelerator` as that item's key
